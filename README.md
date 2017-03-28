@@ -2,7 +2,7 @@ The content below is an example project proposal / requirements document. Replac
 
 (___TODO__: your project name_)
 
-# Shoppy Shoperson 
+# Oh My Foodie! 
 
 ## Overview
 

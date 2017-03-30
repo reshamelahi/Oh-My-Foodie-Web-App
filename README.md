@@ -1,7 +1,3 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(___TODO__: your project name_)
-
 # Oh My Foodie! 
 
 ## Overview
@@ -15,35 +11,71 @@ Oh My Foodie (OMF!) is a web app that allows users to create a profile and keep 
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
-
-The application will store Users, Lists and Items
+The application will store Users, Lists, Locations, Comments, and Restaurants
 
 * users can have multiple lists (via references)
 * each list can have multiple items (by embedding)
+* each restaurant can have user comments associated with it
 
-(___TODO__: sample documents_)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  user_fullname: "Guru",
+	username: "nomnomguru"
+	hash: // a password hash,
+	email: nomnomguru@gmail.com,
+	lists: // an array of references to List documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example List with Embedded Restaurants:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
+	name: "Restaurants in Manhattan",
+	restaurants: [
+		{ name: "Mamoun’s", visited: false},
+		{ name: "Momofuku Milk Bar", visited: true},
+	],
+	done: false,
+	createdAt: // timestamp
+}
+```
+An Example Restaurants:
+
+```javascript
+{
+  name: "Mamoun's",
+	description: "if you're in the nyu area, you have to go to the middle eastern inspired hole in the wall",
+	type: ["Middle Eastern", "hole in the wall"],
+	location: // reference to Location object,
+	pricerange: "$",
+	upvotes: 207,
+	comments: // embedded Comments
+}
+```
+An Example Location:
+
+```javascript
+{
+	name: // reference to restaurant object,
+	street: "119 MacDougal St",
+	unit: "",
+	city: "New York",
+	state: "NY",
+	zipcode: "10012",
+	country: "United States"
+}
+```
+An Example Comments:
+
+```javascript
+{
+	user: // reference to User object
+	comment: "I love getting the falafel here!!"
   createdAt: // timestamp
 }
 ```

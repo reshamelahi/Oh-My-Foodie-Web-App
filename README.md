@@ -106,28 +106,36 @@ An Example Comments:
 (___TODO__: draw out a site map that shows how pages are related to each other_)
 
 Each page will link to the homepage as well as the userprofile
-/ - links to:
+
+* / - links to:
 	* /goodeats
 	* /nomnomguru
 	* /restaurant/:slug
-/goodeats - links to:
+	
+* /goodeats - links to:
 	* /goodeats/create
-/goodeats/create - links to:
+	
+* /goodeats/create - links to:
 	* /goodeats
-/userprofile - links to:
+	
+* /userprofile - links to:
 	* /userprofile/createlist
 	* /userprofile/list/:slug
 	* /goodeats
 	* /foodienetwork
 	* /nomnomguru
-/userprofile/createlist - links to:
+	
+* /userprofile/createlist - links to:
 	* /userprofile/list/:slug
-/userprofile/list/:slug - links to:
+	
+* /userprofile/list/:slug - links to:
 	* /userprofile/list
 	* /userprofile/list/:slug/addelement
-/userprofile/list/:slug/addelement - links to:
+	
+* /userprofile/list/:slug/addelement - links to:
 	* /userprofile/list/:slug
-/nomnomguru - links to:
+	
+* /nomnomguru - links to:
 	* /restaurant/:slug
 
 ## User Stories or Use Cases

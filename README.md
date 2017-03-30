@@ -194,7 +194,7 @@ Each page will link to the homepage as well as the userprofile
 	* (2 points) Use a CSS preprocessor
 		* Sass
 
-## [Link to Initial Main Project File](app.js) 
+## [Link to Initial Main Project File](/foodieapp/app.js) 
 
 https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/blob/master/app.js
 

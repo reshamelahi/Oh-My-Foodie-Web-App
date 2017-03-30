@@ -81,8 +81,6 @@ An Example Comments:
 
 ## [Link to Commented First Draft Schema](/foodieapp/db.js) 
 
-https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/blob/master/db.js
-
 ## Wireframes
 
 ohmyfoodie.com/ - homepage with login or create account, as well as a search bar
@@ -195,8 +193,6 @@ Each page will link to the homepage as well as the userprofile
 		* Sass
 
 ## [Link to Initial Main Project File](/foodieapp/app.js) 
-
-https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/blob/master/app.js
 
 ## Annotations / References Used
 

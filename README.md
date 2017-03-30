@@ -2,8 +2,6 @@
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
-
 ATTENTION ALL FOODIES. Are you having a tough time keeping track of the list of places you want to try? Does it bother you that you can’t remember where or what the name of that cute restaurant you passed by was called? Are you interested in networking with other foodies around the world to get their recommendations? Well, now you can do all these things in one place: Oh My Foodie!
 
 Oh My Foodie (OMF!) is a web app that allows users to create a profile and keep track of multiple lists of places they want to try/have tried. They can register and login. After logging in, they can create or view their lists and add places to them. Users can receive recommendations from our very own NomNomGuru. If there’s a restaurant users love and want the world to know about, they can add it to the app. Or if they simply want to connect with foodies around the world, they can chat via our Foodie Network. 
@@ -83,23 +81,24 @@ An Example Comments:
 
 ## [Link to Commented First Draft Schema](db.js) 
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
+https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/blob/master/db.js
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+ohmyfoodie.com/ - homepage with login or create account, as well as a search bar
 
-/list/create - page for creating a new shopping list
+![list create](documentation/homepage.png)
 
-![list create](documentation/list-create.png)
+/goodeats - a page with recommendations based on popularity and allows upvoting
 
-/list - page for showing all shopping lists
+![list](documentation/recommendedrestaurants.png)
 
-![list](documentation/list.png)
-
-/list/slug - page for showing specific shopping list
+/goodeats/create - a form for creating a recommendation
 
 ![list](documentation/list-slug.png)
+
+/userprofile - a page with the users lists
+
 
 ## Site map
 

@@ -87,22 +87,45 @@ https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/
 
 ohmyfoodie.com/ - homepage with login or create account, as well as a search bar
 
-![list create](documentation/homepage.png)
+(documentation/homepage.png)
 
 /goodeats - a page with recommendations based on popularity and allows upvoting
 
-![list](documentation/recommendedrestaurants.png)
+(documentation/recommendedrestaurants.png)
 
 /goodeats/create - a form for creating a recommendation
 
-![list](documentation/list-slug.png)
+(documentation/restaurantrecommendation.png)
 
 /userprofile - a page with the users lists
 
+(documentation/lists.png)
+
+/userprofile/createlist - a form for creating a new list
+
+(documentation/newlist.png)
+
+/userprofile/list/:slug - a unique page for a specific list
+
+(documentation/specificlist.png)
+
+/userprofile/list/:slug/addelement
+
+(documentation/addrestaurant.png)
+
+/nomnomguru - a page with curated recommendations and a contact page
+
+(documentation/nomnomguru.png)
+
+/foodienetwork - a page that functions like a chatroom
+
+(documentation/foodienetwork.png)
+
+/restaurant/:slug - a unique page for a specific restaurant
+
+(documentation/restaurant.png)
 
 ## Site map
-
-(___TODO__: draw out a site map that shows how pages are related to each other_)
 
 Each page will link to the homepage as well as the userprofile
 
@@ -139,8 +162,6 @@ Each page will link to the homepage as well as the userprofile
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
 1. as non-registered user, I can register a new account with the site
 2. as a non-registered user, I can search for a restaurant
 3. as a non-registered user, I can interact with nomnomguru
@@ -160,24 +181,26 @@ Each page will link to the homepage as well as the userprofile
 
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
-
 * (7 points) Integrate user authentication
 	* Implement sign-up and registration
 	* Implement sign-in with a provider such as FB
 * (1 point) Per external API
 	* Google maps
-
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
-
+* (3 points) Configuration management
+	* nconf
+* (3 points) Unit testing with JavaScript
+	* Mocha
+* (3 points) Use grunt, gulp, webpack or even make (!) to automate any of the following … must be used in combination with one or more of the other requirements, such as:
+	* (2 points) Use a CSS preprocessor
+		* Sass
 
 ## [Link to Initial Main Project File](app.js) 
 
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+https://github.com/nyu-csci-ua-0480-008-spring-2017/rae296-sg3688-final-project/blob/master/app.js
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
 
 1. [passport.js authentication docs](http://passportjs.org/docs)
 2. [tutorial on adding google maps with a marker](https://developers.google.com/maps/documentation/javascript/adding-a-google-map)
+3. [tutorial on Sass](https://www.codecademy.com/learn/learn-sass)

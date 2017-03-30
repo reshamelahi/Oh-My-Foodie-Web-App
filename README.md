@@ -8,9 +8,9 @@ The content below is an example project proposal / requirements document. Replac
 
 (___TODO__: a brief one or two paragraph, high-level description of your project_)
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+ATTENTION ALL FOODIES. Are you having a tough time keeping track of the list of places you want to try? Does it bother you that you can’t remember where or what the name of that cute restaurant you passed by was called? Are you interested in networking with other foodies around the world to get their recommendations? Well, now you can do all these things in one place: Oh My Foodie!
 
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Oh My Foodie (OMF!) is a web app that allows users to create a profile and keep track of multiple lists of places they want to try/have tried. They can register and login. After logging in, they can create or view their lists and add places to them. Users can receive recommendations from our very own NomNomGuru. If there’s a restaurant users love and want the world to know about, they can add it to the app. Or if they simply want to connect with foodies around the world, they can chat via our Foodie Network. 
 
 
 ## Data Model

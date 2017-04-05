@@ -99,7 +99,4 @@ app.get('/', (req, res) => {
   res.render('place');
 });
 
-app.listen(3000);
-
-
 module.exports = app;

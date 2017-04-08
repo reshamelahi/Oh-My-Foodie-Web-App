@@ -30,7 +30,7 @@ require('./db');
 // enable sessions
 const session = require('express-session');
 const sessionOptions = {
-    secret: 'secret cookie thang (store this elsewhere!)',
+    secret: '5c99869a7ec9090ff67044df4a7f6d663259660d853fa5523df3d73e3759b3b99f9481a7c6ea75289525c778465dfd3382f9b09179695380c2353f8f3f8df44f',
     resave: true,
       saveUninitialized: true
 };
@@ -52,51 +52,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-// homepage
-app.get('/', (req, res) => {
-  res.render('layout');
-});
-
-// goodeats
-app.get('/', (req, res) => {
-  res.render('foodRec');
-});
-
-// goodeats/create
-app.get('/', (req, res) => {
-  res.render('createRec');
-});
-
-// userprofile
-app.get('/', (req, res) => {
-  res.render('profile');
-});
-
-// userprofile/create
-app.get('/', (req, res) => {
-  res.render('createList');
-});
-
-// userprofile/list.:slug
-app.get('/', (req, res) => {
-  res.render('list');
-});
-
-// nomnomguru
-app.get('/', (req, res) => {
-  res.render('guruji');
-});
-
-// foodienetwork
-app.get('/', (req, res) => {
-  res.render('chatroom');
-});
-
-// restaurant/:slug
-app.get('/', (req, res) => {
-  res.render('place');
 });
 
 module.exports = app;

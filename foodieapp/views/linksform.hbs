@@ -1,0 +1,24 @@
+<h1>Foodie Network</h1>
+<br/>
+<hr/>
+
+<div>
+	<ol>
+	{{#each links as |link|}}
+	<li><a href={{link.url}}>{{link.title}}</a>, <a href={{link.slug}}>[comments]</a> {{link.votes}} votes</li>
+	{{/each}}
+	</ol>
+</div>
+
+<div class="error">
+{{#if err}}
+	{{#each err.errors}}
+		{{message}}
+	{{/each}}
+{{/if}}</div>
+
+<form method="POST" action="/foodienetwork">
+	URL: <input type="url" name="url" value="">	
+	Title: <input type="text" name="title" value="">	
+	<input type="submit" value="Submit Link!"/>	
+</form>

@@ -1,3 +1,5 @@
+require('./db');
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -25,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-require('./db');
 
 // enable sessions
 const session = require('express-session');

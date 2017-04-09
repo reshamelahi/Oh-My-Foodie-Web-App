@@ -50,7 +50,7 @@ const Restaurant = new mongoose.Schema({
 const List = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   name: {type: String, required: true},
-  createdAt: {type: Date, required: true},
+  createdAt: {type: Date},
   restaurants: [Restaurant]
 });
 
@@ -88,5 +88,6 @@ Link.plugin(URLSlugs('title'));
 
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);
+mongoose.model("List", List)
 
 mongoose.connect(dbconf);

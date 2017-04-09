@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
 const mongoose = require('mongoose');
-
-
 const Link = mongoose.model("Link");
-
-const mongoose = require('mongoose');
 const List = mongoose.model('List');
 
 /* GET home page. */
@@ -33,8 +30,6 @@ router.post('/userprofile', (req, res) => {
 		}
 	});
 });
-
-=======
 
 /* GET foodienetwork */
 router.get('/foodienetwork', (req, res) => {

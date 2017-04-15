@@ -88,6 +88,8 @@ Link.plugin(URLSlugs('name'));
 
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);
-mongoose.model("List", List)
+mongoose.model("List", List);
+mongoose.model("Restaurant", Restaurant);
+mongoose.model("Location", Location);
 
 mongoose.connect(dbconf);

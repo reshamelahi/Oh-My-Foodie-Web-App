@@ -4,13 +4,17 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Link = mongoose.model("Link");
 const List = mongoose.model('List');
+const Restaurant = mongoose.model('Restaurant');
+const Location = mongoose.model('Location');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Oh My Foodie!' });
 });
 
-// userprofile/createlist
+// -------------------------------------------------------------------------------
+
+/* userprofile/createlist */
 router.get('/userprofile', (req, res) => {
 	List.find({}, (err, lists) => {
 		res.render('userprofile', {lists: lists});
@@ -31,36 +35,9 @@ router.post('/userprofile', (req, res) => {
 	});
 });
 
-// list page with slug
-app.get('/:slug', (req, res) => {
-  List.findOne({slug: req.params.slug}, (err, lists) => {
-    //const latestComment = req.session.lastComment || '';
-    if (req.query.button === "Vote") {
-      List.findOneAndUpdate({slug: req.params.slug}, (err, links) => {
-      res.redirect("/");
-      });
-    }
-    else {
-      res.render('comment', {links: links}); 
-    }
-  });
-});
+// -------------------------------------------------------------------------------
 
-app.post('/:slug', (req, res) => {
-  const slugName = req.params.slug;
-  Link.findOneAndUpdate({slug: slugName}, {$push: {comments: {text: req.body.text, user: req.body.user}}}, (err, links) => {
-    if (err) {
-      res.render('comment', {links: link, err: err});
-    }
-    else {
-      req.session.lastComment = req.body.text;
-      res.redirect("/" + slugName);
-    }
-    });
-    
-});
-
-/* GET foodienetwork */
+/* foodienetwork */
 router.get('/foodienetwork', (req, res) => {
 	Link.find({}, (err, links) => {
 		res.render('linksform', {links: links});
@@ -89,7 +66,7 @@ router.get('/foodienetwork/:slug', function(req, res) {
         res.redirect("/foodienetwork");
       });
     }
-		else { res.render('foodienetworkcommentform', {links: links, 'lastComment': latestComment}); }
+		else { res.render('commentform', {links: links, 'lastComment': latestComment}); }
 	});
 });
 
@@ -97,12 +74,37 @@ router.post('/foodienetwork/:slug', (req, res) => {
   const slugVar = req.params.slug;
   Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name:req.body.name}}}, (err, links) => {
     if(err) {
-        res.render('foodienetworkcommentform', {links:links, err:err}); 
+        res.render('commentform', {links:links, err:err}); 
     }
     else {
       req.session.lastComment = req.body.text;
       res.redirect('/foodienetwork/' + slugVar);
     }
+  });
+});
+
+// -------------------------------------------------------------------------------
+
+/* goodeats */
+router.get('/goodeats', (req, res) => {
+  Restaurant.find({}, (err, restaurants) => {
+    res.render('goodeats', {restaurants: restaurants});
+  });
+});
+
+router.post('/goodeats', (req, res) => {
+  const r = new Restaurant({
+    name: req.body.name, 
+    description: req.body.description,
+    type: req.body.type,
+    priceRange: req.body.price,
+    upvotes: 0
+  });
+  r.save((err, restaurants) => {
+    if(err) {
+        res.render('goodeats', {restaurants:restaurants, err:err}); 
+    }
+    else { res.redirect('/goodeats'); }
   });
 });
 

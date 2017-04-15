@@ -189,8 +189,8 @@ Each page will link to the homepage as well as the userprofile
 * (3 points) Unit testing with JavaScript
 	* Mocha
 * (3 points) Use grunt, gulp, webpack or even make (!) to automate any of the following … must be used in combination with one or more of the other requirements, such as:
-	* (2 points) Use a CSS preprocessor
-		* Sass
+	* (2 points) Integrate ESLint / JSHint / JSLint into your workflow
+		* ESLint
 
 ## [Link to Initial Main Project File](/foodieapp) 
 

@@ -1,0 +1,17 @@
+<h1>NomNomGuru</h1>
+<h2>Chat with me!</h2>
+
+<div class="coms"> 
+	{{#each comments as |comment|}}
+		<strong>{{comment.name}}</strong> <i>says:</i>
+		<br>
+		{{comment.text}}
+		<br><br>
+	{{/each}}
+</div>
+
+<form method="POST" action="">
+	Comment: <input type="text" name="text" value="">	
+	Name: <input type="text" name="user" value="">	
+	<input type="submit" value="Add Comment">	
+</form>

@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const mongoose = require('mongoose');
 const Link = mongoose.model("Link");
@@ -105,6 +105,12 @@ router.post('/goodeats', (req, res) => {
         res.render('goodeats', {restaurants:restaurants, err:err}); 
     }
     else { res.redirect('/goodeats'); }
+  });
+});
+
+router.get('/:slug', function(req, res) {
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+    res.render('restaurant', {restaurants:restaurants, err:err});
   });
 });
 

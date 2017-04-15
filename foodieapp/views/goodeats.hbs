@@ -1,0 +1,54 @@
+<h1>Goodeats</h1>
+
+<div class="description">
+<p>Find the most popularly recommended restaurants.</p>
+</div>
+
+<hr/>
+
+<div>
+	<ol>
+	{{#each restaurants as |restaurant|}}
+	<li><a href={{restaurant.name}}>{{restaurant.name}}</a></li>
+	{{/each}}
+	</ol>
+</div>
+
+<div class="error">
+{{#if err}}
+	{{#each err.errors}}
+		{{message}}
+	{{/each}}
+{{/if}}</div>
+
+<hr>
+<h3>Give us your recommendations!</h3>
+<form method="POST" action='/goodeats'>
+	Restaurant Name: <input type="text" name="name" value=""><br>
+	Description: <input type="text" name="description" value=""><br>
+	Type of Food: 
+	<select name="type">
+		<option value="american">American</option>
+  		<option value="asian">Asian</option>
+  		<option value="bakery">Bakery</option>
+  		<option value="brazillian">Brazillian</option>
+  		<option value="chinese">Chinese</option>
+  		<option value="dessert">Dessert</option>
+  		<option value="diner">Diner</option>
+  		<option value="indian">Indian</option>
+  		<option value="italian">Italian</option>
+  		<option value="japanese">Japanese</option>
+  		<option value="latinamerican">Latin American</option>
+  		<option value="mediterranean">Mediterranean</option>
+  		<option value="mexican">Mexican</option>
+  		<option value="middleeastern">Middle Eastern</option>
+  		<option value="thai">Thai</option>
+  		<option value="vietnamese">Vietnamese</option>
+	</select><br>
+	Price: 
+	<input type="radio" name="price" value="$" checked>$
+  	<input type="radio" name="price" value="$$">$$
+  	<input type="radio" name="price" value="$$$">$$$<br>
+
+	<input type="submit" value="Add Recommendation"/>	
+</form>

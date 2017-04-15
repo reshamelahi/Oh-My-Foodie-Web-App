@@ -1,8 +1,43 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+	text-align: center;
+	font-family: Helvetica;
 }
 
 a {
-  color: #00B7FF;
+	display: inline;
+    position: relative;
+	letter-spacing: -2px; /* This will push it together giving us a nice 3D vibe */
+	color: rgba(0,0,255,0.5); /* This will give us a blue at 50% opacity */
+	font-size: 25px;
+}
+
+h1 {
+    display: inline;
+    position: relative;
+    font-size: 75px;
+	letter-spacing: -10px; /* This will push it together giving us a nice 3D vibe */
+	color: rgba(0,0,255,0.5); /* This will give us a blue at 50% opacity */
+}
+
+ol {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0.5cm;
+}
+
+form {
+	margin-top: 0.5cm;
+	font-size: 20px;
+}
+
+li {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.description {
+	margin-left: 10em;
+	margin-right: 10em;
 }

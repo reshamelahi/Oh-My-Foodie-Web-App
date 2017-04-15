@@ -84,7 +84,7 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 }
 
 // TODO: add remainder of setup for slugs, connection, registering models, etc. below
-Link.plugin(URLSlugs('title'));
+Link.plugin(URLSlugs('name'));
 
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);

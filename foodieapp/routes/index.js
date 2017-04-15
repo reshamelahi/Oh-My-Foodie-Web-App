@@ -31,6 +31,35 @@ router.post('/userprofile', (req, res) => {
 	});
 });
 
+// list page with slug
+app.get('/:slug', (req, res) => {
+  List.findOne({slug: req.params.slug}, (err, lists) => {
+    //const latestComment = req.session.lastComment || '';
+    if (req.query.button === "Vote") {
+      List.findOneAndUpdate({slug: req.params.slug}, (err, links) => {
+      res.redirect("/");
+      });
+    }
+    else {
+      res.render('comment', {links: links}); 
+    }
+  });
+});
+
+app.post('/:slug', (req, res) => {
+  const slugName = req.params.slug;
+  Link.findOneAndUpdate({slug: slugName}, {$push: {comments: {text: req.body.text, user: req.body.user}}}, (err, links) => {
+    if (err) {
+      res.render('comment', {links: link, err: err});
+    }
+    else {
+      req.session.lastComment = req.body.text;
+      res.redirect("/" + slugName);
+    }
+    });
+    
+});
+
 /* GET foodienetwork */
 router.get('/foodienetwork', (req, res) => {
 	Link.find({}, (err, links) => {

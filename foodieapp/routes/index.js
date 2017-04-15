@@ -32,7 +32,7 @@ router.post('/userprofile', (req, res) => {
 });
 
 // list page with slug
-app.get('/:slug', (req, res) => {
+router.get('/:slug', (req, res) => {
   List.findOne({slug: req.params.slug}, (err, lists) => {
     //const latestComment = req.session.lastComment || '';
     if (req.query.button === "Vote") {
@@ -46,7 +46,7 @@ app.get('/:slug', (req, res) => {
   });
 });
 
-app.post('/:slug', (req, res) => {
+router.post('/:slug', (req, res) => {
   const slugName = req.params.slug;
   Link.findOneAndUpdate({slug: slugName}, {$push: {comments: {text: req.body.text, user: req.body.user}}}, (err, links) => {
     if (err) {

@@ -1,0 +1,13 @@
+<h1>in here</h1>
+<h1>{{restaurants.name}}</h1>
+
+<div class="error">
+{{#if err}}
+	{{#each err.errors}}
+		{{message}}
+	{{/each}}
+{{/if}}</div>
+
+<div class="description">
+<p>{{restaurants.description}}</p>
+</div>

@@ -1,3 +1,5 @@
+/* TO RUN, TYPE IN THE COMMAND 'gulp'*/
+
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 

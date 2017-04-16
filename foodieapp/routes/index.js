@@ -4,6 +4,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Link = mongoose.model("Link");
 const List = mongoose.model('List');
+const Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -32,32 +33,44 @@ router.post('/userprofile', (req, res) => {
 });
 
 // list page with slug
-router.get('/:slug', (req, res) => {
-  List.findOne({slug: req.params.slug}, (err, lists) => {
-    //const latestComment = req.session.lastComment || '';
-    if (req.query.button === "Vote") {
-      List.findOneAndUpdate({slug: req.params.slug}, (err, links) => {
-      res.redirect("/");
-      });
-    }
-    else {
-      res.render('comment', {links: links}); 
-    }
+// router.get('/:slug', (req, res) => {
+//   List.findOne({slug: req.params.slug}, (err, lists) => {
+//     res.render('addToList');
+//   });
+// });
+
+// router.post('/:slug', (req, res) => {
+//   const slugName = req.params.slug;
+//   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
+//     if (err) {
+//       res.render('/' + slugName, {lists: list, err: err});
+//     }
+//     else {
+//       res.redirect("/" + slugName);
+//     }
+//     });
+// });
+
+// nomnomguru
+router.get('/nomnomguru', (req, res) => {
+  Comment.find({}, (err, comments) => {
+    res.render('nomnomguru', {comments: comments});
   });
 });
 
-router.post('/:slug', (req, res) => {
-  const slugName = req.params.slug;
-  Link.findOneAndUpdate({slug: slugName}, {$push: {comments: {text: req.body.text, user: req.body.user}}}, (err, links) => {
-    if (err) {
-      res.render('comment', {links: link, err: err});
+router.post('/nomnomguru', (req, res) => {
+  const c = new Comment({
+    name: req.body.name,
+    text: req.body.text 
+  });
+  c.save((err, lists) => {
+    if(err) {
+      res.render('nomnomguru', {comments:comments, err:err}); 
     }
-    else {
-      req.session.lastComment = req.body.text;
-      res.redirect("/" + slugName);
+    else { 
+      res.redirect('/nomnomguru'); 
     }
-    });
-    
+  });
 });
 
 /* GET foodienetwork */

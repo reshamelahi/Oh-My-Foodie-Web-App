@@ -19,7 +19,8 @@ const User = new mongoose.Schema({
 const Comment = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   text: String,
-  createdAt: {type: Date, required: true},
+  name: String
+  //createdAt: {type: Date, required: true},
 });
 
 const Link = new mongoose.Schema({
@@ -84,7 +85,8 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 }
 
 // TODO: add remainder of setup for slugs, connection, registering models, etc. below
-Link.plugin(URLSlugs('name'));
+Link.plugin(URLSlugs('title'));
+List.plugin(URLSlugs('name'));
 
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);

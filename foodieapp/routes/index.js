@@ -108,10 +108,10 @@ router.post('/goodeats', (req, res) => {
   });
 });
 
-router.get('/:slug', function(req, res) {
-  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
-    res.render('restaurant', {restaurants:restaurants, err:err});
-  });
-});
+// router.get('/:slug', function(req, res) {
+//   Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+//     res.render('restaurant', {restaurants:restaurants, err:err});
+//   });
+// });
 
 module.exports = router;

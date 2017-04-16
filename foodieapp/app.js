@@ -6,6 +6,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const hbs = require('hbs');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -16,24 +17,24 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-hbs.registerHelper('humanize', function(date) {
-    var hum = new Humanize(date);
-    return hum.humanizeDate();
-});
+// hbs.registerHelper('humanize', function(date) {
+//     var hum = new Humanize(date);
+//     return hum.humanizeDate();
+// });
 
-hbs.registerHelper('isEqual', function(obj1, obj2) {
-    return obj1.equals(obj2);
-});
+// hbs.registerHelper('isEqual', function(obj1, obj2) {
+//     return obj1.equals(obj2);
+// });
 
-hbs.registerHelper('countComments', function(com) {
-    return com.length;
-})
+// hbs.registerHelper('countComments', function(com) {
+//     return com.length;
+// })
 
-// bootstrap middleware config
-require('./middleware')(app, passport);
+// // bootstrap middleware config
+// require('./middleware')(app, passport);
 
-// bootstrap passport config
-require('./passport')(passport);
+// // bootstrap passport config
+// require('./passport')(passport);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

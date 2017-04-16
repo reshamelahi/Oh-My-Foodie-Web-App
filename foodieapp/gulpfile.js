@@ -23,3 +23,18 @@ gulp.task('lint', () => {
 gulp.task('default', ['lint'], function () {
     // This will only run if the lint task is successful... 
 });
+
+/* ---------------------------------------------------------------- */
+ 
+var sass = require('gulp-sass');
+
+gulp.task('styles', function() {
+    gulp.src('sass/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./css/'))
+});
+
+//Watch task
+gulp.task('default',function() {
+    gulp.watch('sass/**/*.scss',['styles']);
+});

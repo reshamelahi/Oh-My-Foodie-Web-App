@@ -6,6 +6,7 @@ const Link = mongoose.model("Link");
 const List = mongoose.model('List');
 const Restaurant = mongoose.model('Restaurant');
 const Location = mongoose.model('Location');
+const Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -36,6 +37,47 @@ router.post('/userprofile', (req, res) => {
 });
 
 // -------------------------------------------------------------------------------
+
+// list page with slug
+// router.get('/:slug', (req, res) => {
+//   List.findOne({slug: req.params.slug}, (err, lists) => {
+//     res.render('addToList');
+//   });
+// });
+
+// router.post('/:slug', (req, res) => {
+//   const slugName = req.params.slug;
+//   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
+//     if (err) {
+//       res.render('/' + slugName, {lists: list, err: err});
+//     }
+//     else {
+//       res.redirect("/" + slugName);
+//     }
+//     });
+// });
+
+// nomnomguru
+router.get('/nomnomguru', (req, res) => {
+  Comment.find({}, (err, comments) => {
+    res.render('nomnomguru', {comments: comments});
+  });
+});
+
+router.post('/nomnomguru', (req, res) => {
+  const c = new Comment({
+    name: req.body.name,
+    text: req.body.text 
+  });
+  c.save((err, lists) => {
+    if(err) {
+      res.render('nomnomguru', {comments:comments, err:err}); 
+    }
+    else { 
+      res.redirect('/nomnomguru'); 
+    }
+  });
+});
 
 /* foodienetwork */
 router.get('/foodienetwork', (req, res) => {

@@ -16,6 +16,25 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+hbs.registerHelper('humanize', function(date) {
+    var hum = new Humanize(date);
+    return hum.humanizeDate();
+});
+
+hbs.registerHelper('isEqual', function(obj1, obj2) {
+    return obj1.equals(obj2);
+});
+
+hbs.registerHelper('countComments', function(com) {
+    return com.length;
+})
+
+// bootstrap middleware config
+require('./middleware')(app, passport);
+
+// bootstrap passport config
+require('./passport')(passport);
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -38,11 +57,10 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   const err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
+app.use(function(req, res) {
+    res.status(404);
+    res.render('error');
+});
 
 // error handler
 app.use(function(err, req, res, next) {

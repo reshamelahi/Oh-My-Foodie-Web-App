@@ -4,6 +4,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const Link = mongoose.model("Link");
 const List = mongoose.model('List');
+const Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -32,24 +33,23 @@ router.post('/userprofile', (req, res) => {
 });
 
 // list page with slug
-router.get('/:slug', (req, res) => {
-  List.findOne({slug: req.params.slug}, (err, lists) => {
-    res.render('addToList');
-  });
-});
+// router.get('/:slug', (req, res) => {
+//   List.findOne({slug: req.params.slug}, (err, lists) => {
+//     res.render('addToList');
+//   });
+// });
 
-router.post('/:slug', (req, res) => {
-  const slugName = req.params.slug;
-  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
-    if (err) {
-      res.render('/' + slugName, {lists: list, err: err});
-    }
-    else {
-      res.redirect("/" + slugName);
-    }
-    });
-    
-});
+// router.post('/:slug', (req, res) => {
+//   const slugName = req.params.slug;
+//   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
+//     if (err) {
+//       res.render('/' + slugName, {lists: list, err: err});
+//     }
+//     else {
+//       res.redirect("/" + slugName);
+//     }
+//     });
+// });
 
 // nomnomguru
 router.get('/nomnomguru', (req, res) => {

@@ -40,7 +40,7 @@ router.post('/userprofile', (req, res) => {
 // list page with slug
 router.get('/list/:slug', (req, res) => {
   List.findOne({slug: req.params.slug}, (err, lists) => {
-    res.render('addToList');
+    res.render('addToList', {lists:lists, err:err});
   });
 });
 
@@ -48,12 +48,12 @@ router.post('/list/:slug', (req, res) => {
   const slugName = req.params.slug;
   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, lists) => {
     if (err) {
-      res.render('addToList' + slugName, {lists: lists, err: err});
+      res.render('addToList', {lists: lists, err: err});
     }
     else {
-      res.redirect("/" + slugName);
+      res.redirect("/list/" + req.params.slug);
     }
-    });
+  });
 });
 
 // nomnomguru
@@ -147,6 +147,9 @@ router.post('/goodeats', (req, res) => {
   });
 });
 
+// -------------------------------------------------------------------------------
+
+/* slug for restaurant pages */
 router.get('/res/:slug', function(req, res) {
   Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
     res.render('restaurant', {restaurants:restaurants, err:err});

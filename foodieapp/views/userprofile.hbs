@@ -8,9 +8,16 @@
 	</ol>
 </div>
 
-<h3>Create a New List!<h3>
+<div class="error">
+{{#if err}}
+	{{#each err.errors}}
+		{{message}}
+	{{/each}}
+{{/if}}</div>
 
-<form method="POST" action="/userprofile">
+<h3>Create a New List!</h3>
+
+<form method="POST" action="userprofile">
 	List Name: <input type="text" name="name">	
 	<input type="submit" value="Create list!">	
 </form>

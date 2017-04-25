@@ -17,23 +17,21 @@ router.get('/', function(req, res, next) {
 
 /* userprofile/createlist */
 router.get('/userprofile', (req, res) => {
-	List.find({}, (err, lists) => {
-		res.render('userprofile', {lists: lists});
-	});
+  List.find({}, (err, lists) => {
+    res.render('userprofile', {lists: lists});
+  });
 });
 
 router.post('/userprofile', (req, res) => {
-	const l = new List({
-		name: req.body.name, 
-	});
-	l.save((err, lists) => {
-		if(err) {
-			res.render('userprofile', {lists:lists, err:err}); 
-		}
-		else { 
-			res.redirect('/userprofile'); 
-		}
-	});
+  const l = new List({
+    name: req.body.name
+  });
+  l.save((err, lists) => {
+    if(err) {
+        res.render('userprofile', {lists:lists, err:err}); 
+    }
+    else { res.redirect('/userprofile'); }
+  });
 });
 
 // -------------------------------------------------------------------------------
@@ -49,7 +47,7 @@ router.post('/list/:slug', (req, res) => {
   const slugName = req.params.slug;
   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, lists) => {
     if (err) {
-      res.render('addToList' + slugName, {lists: list, err: err});
+      res.render('addToList' + slugName, {lists: lists, err: err});
     }
     else {
       res.redirect("/" + slugName);
@@ -150,10 +148,10 @@ router.post('/goodeats', (req, res) => {
   });
 });
 
-// router.get('/:slug', function(req, res) {
-//   Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
-//     res.render('restaurant', {restaurants:restaurants, err:err});
-//   });
-// });
+router.get('/res/:slug', function(req, res) {
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+    res.render('restaurant', {restaurants:restaurants, err:err});
+  });
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 // 1ST DRAFT DATA MODEL
 const mongoose = require('mongoose');
 const URLSlugs = require('mongoose-url-slugs');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 // users
 // * our site requires authentication...
@@ -9,8 +10,8 @@ const URLSlugs = require('mongoose-url-slugs');
 const User = new mongoose.Schema({
   // username provided by authentication plugin
   // password hash provided by authentication plugin
-  user_fullName: String,
-  email: String,
+  username: String,
+  password: String,
   lists:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
 });
 
@@ -89,7 +90,9 @@ Link.plugin(URLSlugs('title'));
 
 Restaurant.plugin(URLSlugs('name'));
 List.plugin(URLSlugs('name'));
+User.plugin(passportLocalMongoose);
 
+mongoose.model("User", User);
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);
 mongoose.model("List", List);

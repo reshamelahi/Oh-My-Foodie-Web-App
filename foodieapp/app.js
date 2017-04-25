@@ -1,4 +1,7 @@
 require('./db');
+require('./auth');
+
+var passport = require('passport');
 
 const express = require('express');
 const path = require('path');
@@ -43,6 +46,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// NOTE: initialize passport and let it know that we're enabling sessions
+app.use(passport.initialize());
+app.use(passport.session());
+// END
+
+// NOTE: add some middleware that drops req.user into the context of
+// every template
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+});
+// END
 
 app.use('/', index);
 app.use('/users', users);

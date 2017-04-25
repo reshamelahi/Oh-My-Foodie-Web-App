@@ -1,9 +1,9 @@
-<h1>Username<h1>
+<h1>Username</h1>
 
 <div class="list">
 	<ol>
 	{{#each lists as |list|}}
-		<li><a href={{list.slug}}>{{list.name}}</a></li>
+		<li><a href='list/'{{list.slug}}>{{list.name}}</a></li>
 	{{/each}}
 	</ol>
 </div>

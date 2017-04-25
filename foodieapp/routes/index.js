@@ -24,7 +24,8 @@ router.get('/userprofile', (req, res) => {
 
 router.post('/userprofile', (req, res) => {
   const l = new List({
-    name: req.body.name
+    name: req.body.name,
+    restaurants: []
   });
   l.save((err, lists) => {
     if(err) {

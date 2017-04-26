@@ -45,6 +45,10 @@ module.exports = function(passport) {
     },
     function(req, username, password, done) {
 
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
+
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.username' :  username }, function(err, user) {
@@ -63,7 +67,7 @@ module.exports = function(passport) {
 
                 // set the user's local credentials
                 newUser.username    = username;
-                newUser.password = newUser.generateHash(password); // use the generateHash function in our user model
+                newUser.password = newUser.generateHash(password);
 
                 // save the user
                 newUser.save(function(err) {
@@ -72,6 +76,8 @@ module.exports = function(passport) {
                     return done(null, newUser);
                 });
             }
+
+        });    
 
         });
 

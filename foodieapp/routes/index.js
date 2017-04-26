@@ -126,7 +126,6 @@ router.post('/list/:slug', (req, res) => {
     }
     else {
       res.redirect("/list/" + req.params.slug);
-      console.log(req.params.slug);
     }
   });
 });

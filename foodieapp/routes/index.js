@@ -8,7 +8,6 @@ const User = mongoose.model("User");
 const Link = mongoose.model("Link");
 const List = mongoose.model('List');
 const Restaurant = mongoose.model('Restaurant');
-const Location = mongoose.model('Location');
 const Comment = mongoose.model('Comment');
 
 /* GET home page. */
@@ -52,7 +51,6 @@ router.post('/', function(req, res) {
       const message = "Restaurant not found."
       res.render('index', {title: 'Oh My Foodie!', message: message});
     }
-    //res.render('restaurant', {'restaurants': restaurants, searchExists: searchExists, restaurant: req.query.search });
   });
 });
 
@@ -180,7 +178,6 @@ router.post('/foodienetwork', (req, res) => {
   const l = new Link({
     url: req.body.url, 
     title: req.body.title,
-    votes: 0
   });
   l.save((err, links) => {
     if(err) {
@@ -192,12 +189,7 @@ router.post('/foodienetwork', (req, res) => {
 
 router.get('/foodienetwork/:slug', function(req, res) {
 	Link.findOne({slug: req.params.slug}, (err, links) => {
-    if (req.query.button === "Vote") {
-      Link.findOneAndUpdate({slug: req.params.slug}, {$inc: {votes: 1}}, (err, links) => {
-        res.redirect("/foodienetwork");
-      });
-    }
-		else { res.render('commentform', {links: links}); }
+    res.render('commentform', {links: links});
 	});
 });
 

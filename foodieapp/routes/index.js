@@ -12,8 +12,8 @@ const Location = mongoose.model('Location');
 const Comment = mongoose.model('Comment');
 
 /* GET home page. */
-router.get('/', isLoggedIn, function(req, res, next) {
-  res.render('index', {user: req.user, title: 'Oh My Foodie!'});
+router.get('/', function(req, res, next) {
+  res.render('index', {title: 'Oh My Foodie!'});
 });
 
   // =====================================

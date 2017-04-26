@@ -6,12 +6,29 @@
 
 <hr/>
 
-<div>
-	<ol>
-	{{#each restaurants as |restaurant|}}
-	<li><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></li>
-	{{/each}}
-	</ol>
+<div class="home-container">
+    <ol>
+    	{{#each restaurants as |restaurant|}}
+        <li class="mix" style="display: inline-block;">
+            <a href="http://google.com/" target="_blank">
+                <div class="card card--resource ">
+                    <!--Resource-->
+                    <div class="card-hero" style="background-image: url(images/food.jpg)">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title"><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></div>
+                        <p class="card-description">{{restaurant.description}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer-wrapper">
+                            <div class="card-type">{{restaurant.type}}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    </ol>
 </div>
 
 <div class="error">

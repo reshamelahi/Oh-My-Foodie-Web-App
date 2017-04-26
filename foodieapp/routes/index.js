@@ -15,6 +15,30 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Oh My Foodie!' });
 });
 
+router.post('/', function(req, res) {
+  var resFilter = {},
+    searchExists = false;
+  console.log(req.body.search);
+  if(req.body.search) {
+    resFilter.name = req.body.search; 
+    searchExists = true;
+  }
+ 
+  Restaurant.findOne(resFilter, function(err, restaurant) {
+    console.log(restaurant);
+    if (searchExists) {
+      if (restaurant) {
+        res.redirect('/res/' + restaurant.slug);
+      }
+    }
+    else {
+      const message = "Restaurant not found."
+      res.render('index', {title: 'Oh My Foodie!', message: message});
+    }
+    //res.render('restaurant', {'restaurants': restaurants, searchExists: searchExists, restaurant: req.query.search });
+  });
+});
+
 // -------------------------------------------------------------------------------
 
 /* login and registration */

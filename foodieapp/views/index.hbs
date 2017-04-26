@@ -10,6 +10,10 @@
 	<a href="login">Log in</a> or <a href="register"> Register</a>!
 </div>
 
+{{#if message}}
+	{{message}}
+{{/if}}
+
 <form method="POST" action={{slug}}>
 	Search: <input type="text" name="search" value="">	
 	<input type="submit" value="Go"/>	

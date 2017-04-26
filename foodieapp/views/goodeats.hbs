@@ -6,12 +6,29 @@
 
 <hr/>
 
-<div>
-	<ol>
-	{{#each restaurants as |restaurant|}}
-	<li><a href='res/{{restaurant.name}}'>{{restaurant.name}}</a></li>
-	{{/each}}
-	</ol>
+<div class="home-container">
+    <ol>
+    	{{#each restaurants as |restaurant|}}
+        <li class="mix" style="display: inline-block;">
+            <a href="http://google.com/" target="_blank">
+                <div class="card card--resource ">
+                    <!--Resource-->
+                    <div class="card-hero" style="background-image: url(images/food.jpg)">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title"><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></div>
+                        <p class="card-description">{{restaurant.description}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer-wrapper">
+                            <div class="card-type">{{restaurant.type}}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    </ol>
 </div>
 
 <div class="error">
@@ -28,22 +45,22 @@
 	Description: <input type="text" name="description" value=""><br><br>
 	Type of Food: 
 	<select name="type" multiple>
-		<option value="american">American</option>
-  		<option value="asian">Asian</option>
-  		<option value="bakery">Bakery</option>
-  		<option value="brazillian">Brazillian</option>
-  		<option value="chinese">Chinese</option>
-  		<option value="dessert">Dessert</option>
-  		<option value="diner">Diner</option>
-  		<option value="indian">Indian</option>
-  		<option value="italian">Italian</option>
-  		<option value="japanese">Japanese</option>
-  		<option value="latinamerican">Latin American</option>
-  		<option value="mediterranean">Mediterranean</option>
-  		<option value="mexican">Mexican</option>
-  		<option value="middleeastern">Middle Eastern</option>
-  		<option value="thai">Thai</option>
-  		<option value="vietnamese">Vietnamese</option>
+		<option value="American">American</option>
+  		<option value="Asian">Asian</option>
+  		<option value="Bakery">Bakery</option>
+  		<option value="Brazillian">Brazillian</option>
+  		<option value="Chinese">Chinese</option>
+  		<option value="Dessert">Dessert</option>
+  		<option value="Diner">Diner</option>
+  		<option value="Indian">Indian</option>
+  		<option value="Italian">Italian</option>
+  		<option value="Japanese">Japanese</option>
+  		<option value="Latinamerican">Latin American</option>
+  		<option value="Mediterranean">Mediterranean</option>
+  		<option value="Mexican">Mexican</option>
+  		<option value="Middle Eastern">Middle Eastern</option>
+  		<option value="Thai">Thai</option>
+  		<option value="Vietnamese">Vietnamese</option>
 	</select><br><br>
 	Price: 
 	<input type="radio" name="price" value="$" checked>$

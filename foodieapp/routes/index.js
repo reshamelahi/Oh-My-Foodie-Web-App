@@ -96,15 +96,18 @@ router.get('/list/:slug', (req, res) => {
 
 router.post('/list/:slug', (req, res) => {
   const slugName = req.params.slug;
-  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, lists) => {
+  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: new Restaurant ({name: req.body.name})}}, (err, lists) => {
     if (err) {
       res.render('addToList', {lists: lists, err: err});
     }
     else {
       res.redirect("/list/" + req.params.slug);
+      console.log(req.params.slug);
     }
   });
 });
+
+// -------------------------------------------------------------------------------
 
 // nomnomguru
 router.get('/nomnomguru', (req, res) => {
@@ -127,6 +130,8 @@ router.post('/nomnomguru', (req, res) => {
     }
   });
 });
+
+// -------------------------------------------------------------------------------
 
 /* foodienetwork */
 router.get('/foodienetwork', (req, res) => {
@@ -201,7 +206,7 @@ router.post('/goodeats', (req, res) => {
 
 /* slug for restaurant pages */
 router.get('/res/:slug', function(req, res) {
-  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants, count) => {
     res.render('restaurant', {restaurants:restaurants, err:err});
   });
 });

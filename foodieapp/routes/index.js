@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const flash = require('connect-flash');
 
 const mongoose = require('mongoose');
 const User = mongoose.model("User");
@@ -12,40 +13,103 @@ const Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Oh My Foodie!' });
+  res.render('index', {title: 'Oh My Foodie!'});
 });
+
+  // =====================================
+  // LOGIN ===============================
+  // =====================================
+  // show the login form
+  router.get('/login', function(req, res) {
+
+      // render the page and pass in any flash data if it exists
+      res.render('login', { message: req.flash('loginMessage') }); 
+  });
+
+  // process the login form
+  router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/userprofile', // redirect to the secure profile section
+    failureRedirect : '/login', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }));
+
+  // process the login form
+  // app.post('/login', do all our passport stuff here);
+
+  // =====================================
+  // SIGNUP ==============================
+  // =====================================
+  // show the signup form
+  router.get('/register', function(req, res) {
+      // render the page and pass in any flash data if it exists
+      res.render('register', {message: req.flash('registerMessage')});
+  });
+
+  router.post('/register', passport.authenticate('local-signup', {
+    successRedirect : '/userprofile', // redirect to the secure profile section
+    failureRedirect : '/register', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }));
+
+  // process the signup form
+  // app.post('/signup', do all our passport stuff here);
+
+  // =====================================
+  // PROFILE SECTION =====================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  router.get('/userprofile', isLoggedIn, function(req, res) {
+    List.find({}, (err, lists) => {
+      res.render('userprofile', {user: req.user, lists: lists});
+    });
+  });
+
+  router.post('/userprofile', (req, res) => {
+    const l = new List({
+     name: req.body.name, 
+    });
+    l.save((err, lists) => {
+     if(err) {
+        res.render('userprofile', {lists:lists, err:err}); 
+      }
+      else { 
+       res.redirect('/userprofile'); 
+      }
+    });
+  });
+
+  // =====================================
+    // FACEBOOK ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+    router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+    router.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/userprofile',
+            failureRedirect : '/'
+        }));
+
+  // =====================================
+  // LOGOUT ==============================
+  // =====================================
+  router.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+  });
 
 // -------------------------------------------------------------------------------
 
 /* login and registration */
-router.get('/login', function(req, res) {
-  res.render('login');
-});
+// router.get('/login', function(req, res) {
+//   res.render('login');
+// });
 
-router.post('/login', function(req,res,next) {
-  // NOTE: use the custom version of authenticate so that we can
-  // react to the authentication result... and so that we can
-  // propagate an error back to the frontend without using flash
-  // messages
-  passport.authenticate('local', function(err,user) {
-    if(user) {
-      // NOTE: using this version of authenticate requires us to
-      // call login manually
-      req.logIn(user, function(err) {
-        res.redirect('/');
-      });
-    } else {
-      res.render('login', {message:'Your login or password is incorrect.'});
-    }
-  })(req, res, next);
-  // NOTE: notice that this form of authenticate returns a function that
-  // we call immediately! See custom callback section of docs:
-  // http://passportjs.org/guide/authenticate/
-});
-
-router.get('/register', function(req, res) {
-  res.render('register');
-});
+// router.get('/register', function(req, res) {
+//   res.render('register');
+// });
 
 router.post('/register', function(req, res) {
   User.register(new User({username:req.body.username}), 
@@ -57,33 +121,10 @@ router.post('/register', function(req, res) {
       // NOTE: once you've registered, you should be logged in automatically
       // ...so call authenticate if there's no error
       passport.authenticate('local')(req, res, function() {
-        res.redirect('/');
+        res.redirect('/login');
       });
     }
   });   
-});
-
-// -------------------------------------------------------------------------------
-
-/* userprofile/createlist */
-router.get('/userprofile', (req, res) => {
-	List.find({}, (err, lists) => {
-		res.render('userprofile', {lists: lists});
-	});
-});
-
-router.post('/userprofile', (req, res) => {
-	const l = new List({
-		name: req.body.name, 
-	});
-	l.save((err, lists) => {
-		if(err) {
-			res.render('userprofile', {lists:lists, err:err}); 
-		}
-		else { 
-			res.redirect('/userprofile'); 
-		}
-	});
 });
 
 // -------------------------------------------------------------------------------
@@ -205,5 +246,16 @@ router.post('/goodeats', (req, res) => {
 //     res.render('restaurant', {restaurants:restaurants, err:err});
 //   });
 // });
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 module.exports = router;

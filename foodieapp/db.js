@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const URLSlugs = require('mongoose-url-slugs');
 const passportLocalMongoose = require('passport-local-mongoose');
+const bcrypt = require('bcrypt-nodejs');
 
 // users
 // * our site requires authentication...
@@ -10,10 +11,26 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const User = new mongoose.Schema({
   // username provided by authentication plugin
   // password hash provided by authentication plugin
+  facebook_id: String,
+  facebook_token: String,
+  first_name: String,
+  last_name: String,
+  profile_picture: String,
   username: String,
   password: String,
-  lists:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
+  lists:  [{type: mongoose.Schema.Types.ObjectId, ref: 'List'}]
 });
+
+// methods ======================
+// generating a hash
+User.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+User.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
 
 // comment
 // contains a reference to the user who made it

@@ -7,18 +7,5 @@ module.exports = {
         'clientID'      : '1058720764230103', // your App ID
         'clientSecret'  : 'c59d0ea9b8dd3c182abc0f2cd7479ae7', // your App Secret
         'callbackURL'   : 'http://localhost:3000/auth/facebook/callback'
-    },
-
-    // 'twitterAuth' : {
-    //     'consumerKey'       : 'your-consumer-key-here',
-    //     'consumerSecret'    : 'your-client-secret-here',
-    //     'callbackURL'       : 'http://localhost:8080/auth/twitter/callback'
-    // },
-
-    // 'googleAuth' : {
-    //     'clientID'      : 'your-secret-clientID-here',
-    //     'clientSecret'  : 'your-client-secret-here',
-    //     'callbackURL'   : 'http://localhost:8080/auth/google/callback'
-    // }
-
+    }
 };

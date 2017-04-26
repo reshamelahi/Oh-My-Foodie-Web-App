@@ -51,9 +51,6 @@ router.get('/', function(req, res, next) {
     failureFlash : true // allow flash messages
   }));
 
-  // process the signup form
-  // app.post('/signup', do all our passport stuff here);
-
   // =====================================
   // PROFILE SECTION =====================
   // =====================================
@@ -101,52 +98,6 @@ router.get('/', function(req, res, next) {
   });
 
 // -------------------------------------------------------------------------------
-
-/* login and registration */
-// router.get('/login', function(req, res) {
-//   res.render('login');
-// });
-
-// router.get('/register', function(req, res) {
-//   res.render('register');
-// });
-
-router.post('/register', function(req, res) {
-  User.register(new User({username:req.body.username}), 
-      req.body.password, function(err, user){
-    if (err) {
-      // NOTE: error? send message back to registration...
-      res.render('register',{message:'Your registration information is not valid'});
-    } else {
-      // NOTE: once you've registered, you should be logged in automatically
-      // ...so call authenticate if there's no error
-      passport.authenticate('local')(req, res, function() {
-        res.redirect('/login');
-      });
-    }
-  });   
-});
-
-// -------------------------------------------------------------------------------
-
-// list page with slug
-// router.get('/:slug', (req, res) => {
-//   List.findOne({slug: req.params.slug}, (err, lists) => {
-//     res.render('addToList');
-//   });
-// });
-
-// router.post('/:slug', (req, res) => {
-//   const slugName = req.params.slug;
-//   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
-//     if (err) {
-//       res.render('/' + slugName, {lists: list, err: err});
-//     }
-//     else {
-//       res.redirect("/" + slugName);
-//     }
-//     });
-// });
 
 // nomnomguru
 router.get('/nomnomguru', (req, res) => {
@@ -240,12 +191,6 @@ router.post('/goodeats', (req, res) => {
     else { res.redirect('/goodeats'); }
   });
 });
-
-// router.get('/:slug', function(req, res) {
-//   Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
-//     res.render('restaurant', {restaurants:restaurants, err:err});
-//   });
-// });
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

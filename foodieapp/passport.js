@@ -158,8 +158,6 @@ module.exports = function(passport) {
                     newUser.first_name  = nameArr[0]; // look at the passport user profile to see how names are returned
                     newUser.last_name  = nameArr[nameArr.length-1];
                     newUser.username = newUser.first_name;
-                    // newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                    newUser.profile_picture= 'https://graph.facebook.com/'+ profile.id + '/picture?width=9999'
 
                     // save our user to the database
                     newUser.save(function(err) {

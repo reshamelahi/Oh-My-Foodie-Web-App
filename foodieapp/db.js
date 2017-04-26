@@ -15,7 +15,6 @@ const User = new mongoose.Schema({
   facebook_token: String,
   first_name: String,
   last_name: String,
-  profile_picture: String,
   username: String,
   password: String,
   lists:  [{type: mongoose.Schema.Types.ObjectId, ref: 'List'}]

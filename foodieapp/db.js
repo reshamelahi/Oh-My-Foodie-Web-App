@@ -19,8 +19,8 @@ const User = new mongoose.Schema({
 // contains a reference to the user who made it
 const Comment = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  text: String,
-  name: String
+  text: {type:String, required:true},
+  name: {type:String, required:true}
   //createdAt: {type: Date, required: true},
 });
 

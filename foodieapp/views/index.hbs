@@ -7,15 +7,15 @@
 </div>
 
 <div>
-<!-- 	{{#if users}}
-		Logged in as {{users.username}}
-	{{else}} -->
+ 	{{#if user}}
+		Logged in as {{user.username}}
+	{{else}} 
 		<a href="login">Log in</a> or <a href="register"> Register</a>!
-<!-- 	{{/if}} -->
+ 	{{/if}}
 </div>
 
 {{#if message}}
-	{{message}}
+	<p>{{message}}</p>
 {{/if}}
 
 <form method="POST" action={{slug}}>

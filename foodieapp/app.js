@@ -69,7 +69,7 @@ const session = require('express-session');
 const sessionOptions = {
     secret: '5c99869a7ec9090ff67044df4a7f6d663259660d853fa5523df3d73e3759b3b99f9481a7c6ea75289525c778465dfd3382f9b09179695380c2353f8f3f8df44f',
     resave: true,
-      saveUninitialized: true
+    saveUninitialized: true
 };
 app.use(session(sessionOptions));
 

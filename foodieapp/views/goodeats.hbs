@@ -9,7 +9,7 @@
 <div>
 	<ol>
 	{{#each restaurants as |restaurant|}}
-	<li><a href={{restaurant.name}}>{{restaurant.name}}</a></li>
+	<li><a href='res/{{restaurant.name}}'>{{restaurant.name}}</a></li>
 	{{/each}}
 	</ol>
 </div>
@@ -25,9 +25,9 @@
 <h3>Give us your recommendations!</h3>
 <form method="POST" action='/goodeats'>
 	Restaurant Name: <input type="text" name="name" value=""><br>
-	Description: <input type="text" name="description" value=""><br>
+	Description: <input type="text" name="description" value=""><br><br>
 	Type of Food: 
-	<select name="type">
+	<select name="type" multiple>
 		<option value="american">American</option>
   		<option value="asian">Asian</option>
   		<option value="bakery">Bakery</option>
@@ -44,7 +44,7 @@
   		<option value="middleeastern">Middle Eastern</option>
   		<option value="thai">Thai</option>
   		<option value="vietnamese">Vietnamese</option>
-	</select><br>
+	</select><br><br>
 	Price: 
 	<input type="radio" name="price" value="$" checked>$
   	<input type="radio" name="price" value="$$">$$

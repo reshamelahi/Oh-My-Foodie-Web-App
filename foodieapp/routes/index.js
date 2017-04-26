@@ -67,45 +67,44 @@ router.post('/register', function(req, res) {
 
 /* userprofile/createlist */
 router.get('/userprofile', (req, res) => {
-	List.find({}, (err, lists) => {
-		res.render('userprofile', {lists: lists});
-	});
+  List.find({}, (err, lists) => {
+    res.render('userprofile', {lists: lists});
+  });
 });
 
 router.post('/userprofile', (req, res) => {
-	const l = new List({
-		name: req.body.name, 
-	});
-	l.save((err, lists) => {
-		if(err) {
-			res.render('userprofile', {lists:lists, err:err}); 
-		}
-		else { 
-			res.redirect('/userprofile'); 
-		}
-	});
+  const l = new List({
+    name: req.body.name,
+    restaurants: []
+  });
+  l.save((err, lists) => {
+    if(err) {
+        res.render('userprofile', {lists:lists, err:err}); 
+    }
+    else { res.redirect('/userprofile'); }
+  });
 });
 
 // -------------------------------------------------------------------------------
 
 // list page with slug
-// router.get('/:slug', (req, res) => {
-//   List.findOne({slug: req.params.slug}, (err, lists) => {
-//     res.render('addToList');
-//   });
-// });
+router.get('/list/:slug', (req, res) => {
+  List.findOne({slug: req.params.slug}, (err, lists) => {
+    res.render('addToList', {lists:lists, err:err});
+  });
+});
 
-// router.post('/:slug', (req, res) => {
-//   const slugName = req.params.slug;
-//   List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, links) => {
-//     if (err) {
-//       res.render('/' + slugName, {lists: list, err: err});
-//     }
-//     else {
-//       res.redirect("/" + slugName);
-//     }
-//     });
-// });
+router.post('/list/:slug', (req, res) => {
+  const slugName = req.params.slug;
+  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: {name: req.body.name}}}, (err, lists) => {
+    if (err) {
+      res.render('addToList', {lists: lists, err: err});
+    }
+    else {
+      res.redirect("/list/" + req.params.slug);
+    }
+  });
+});
 
 // nomnomguru
 router.get('/nomnomguru', (req, res) => {
@@ -152,24 +151,22 @@ router.post('/foodienetwork', (req, res) => {
 
 router.get('/foodienetwork/:slug', function(req, res) {
 	Link.findOne({slug: req.params.slug}, (err, links) => {
-    const latestComment = req.session.lastComment || '';
     if (req.query.button === "Vote") {
       Link.findOneAndUpdate({slug: req.params.slug}, {$inc: {votes: 1}}, (err, links) => {
         res.redirect("/foodienetwork");
       });
     }
-		else { res.render('commentform', {links: links, 'lastComment': latestComment}); }
+		else { res.render('commentform', {links: links}); }
 	});
 });
 
 router.post('/foodienetwork/:slug', (req, res) => {
   const slugVar = req.params.slug;
-  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name:req.body.name}}}, (err, links) => {
+  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name: req.body.name}}}, (err, links) => {
     if(err) {
         res.render('commentform', {links:links, err:err}); 
     }
     else {
-      req.session.lastComment = req.body.text;
       res.redirect('/foodienetwork/' + slugVar);
     }
   });
@@ -200,10 +197,13 @@ router.post('/goodeats', (req, res) => {
   });
 });
 
-// router.get('/:slug', function(req, res) {
-//   Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
-//     res.render('restaurant', {restaurants:restaurants, err:err});
-//   });
-// });
+// -------------------------------------------------------------------------------
+
+/* slug for restaurant pages */
+router.get('/res/:slug', function(req, res) {
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+    res.render('restaurant', {restaurants:restaurants, err:err});
+  });
+});
 
 module.exports = router;

@@ -1,12 +1,12 @@
 <h1 id="listtitle">{{lists.name}}</h1> 
+{{lists.restaurants}}
 
 <div class="restaurants"> 
-	<ol>
 	{{#each lists.restaurants as |restaurant|}}
-			<li><a href='/res/{{restaurant.slug}}'>{{restaurant.name}}</a></li>
+		<ol>
+			<li><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></li>
+		</ol>
 	{{/each}}
-	</ol>
-
 </div>
 
 

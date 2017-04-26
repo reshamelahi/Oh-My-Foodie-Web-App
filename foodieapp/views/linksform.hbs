@@ -3,9 +3,9 @@
 <hr/>
 
 <div>
-	{{#each links as |link|}}
 	<ol>
-	<li><a href={{link.url}}>{{link.title}}</a>, <a href='foodienetwork/{{link.slug}}'>[comments]</a></li>
+	{{#each links as |link|}}
+	<li><a href={{link.url}}>{{link.title}}</a>, <a href='foodienetwork/{{link.slug}}'>[comments]</a> {{link.votes}} votes</li>
 	{{/each}}
 	</ol>
 </div>

@@ -5,7 +5,7 @@
 <div>
 	<ol>
 	{{#each links as |link|}}
-	<li><a href={{link.url}}>{{link.title}}</a>, <a href={{link.slug}}>[comments]</a> {{link.votes}} votes</li>
+	<li><a href={{link.url}}>{{link.title}}</a>, <a href='foodienetwork/{{link.slug}}'>[comments]</a> {{link.votes}} votes</li>
 	{{/each}}
 	</ol>
 </div>

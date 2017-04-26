@@ -1,15 +1,18 @@
-<!-- <h1 id="listtitle">{{lists.name}}</h1>
+<h1 id="listtitle">{{lists.name}}</h1> 
+{{lists.restaurants}}
 
 <div class="restaurants"> 
 	{{#each lists.restaurants as |restaurant|}}
 		<ol>
-			<li>{{restaurant.name}}</li>
+			<li><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></li>
 		</ol>
 	{{/each}}
 </div>
 
 
-<form method="POST" action="/:slug">
+<form method="POST" action={{lists.slug}}>
 	Restaurant: <input type="text" name="name">	
 	<input type="submit" value="Add to list!">	
-</form> -->
+</form>
+
+<br><a href="/userprofile">back to profile</a>

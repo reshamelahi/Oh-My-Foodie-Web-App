@@ -1,43 +1,180 @@
 * {
-	text-align: center;
-	font-family: Helvetica;
-}
+  text-align: center;
+  font-family: Helvetica; }
 
 a {
-	display: inline;
-    position: relative;
-	letter-spacing: -2px; /* This will push it together giving us a nice 3D vibe */
-	color: rgba(0,0,255,0.5); /* This will give us a blue at 50% opacity */
-	font-size: 25px;
-}
+  display: inline;
+  position: relative;
+  letter-spacing: -2px;
+  /* This will push it together giving us a nice 3D vibe */
+  color: rgba(0, 0, 255, 0.5);
+  /* This will give us a blue at 50% opacity */
+  font-size: 25px; }
 
 h1 {
-    display: inline;
-    position: relative;
-    font-size: 75px;
-	letter-spacing: -10px; /* This will push it together giving us a nice 3D vibe */
-	color: rgba(0,0,255,0.5); /* This will give us a blue at 50% opacity */
-}
+  display: inline;
+  position: relative;
+  font-size: 75px;
+  letter-spacing: -10px;
+  /* This will push it together giving us a nice 3D vibe */
+  color: rgba(0, 0, 255, 0.5);
+  /* This will give us a blue at 50% opacity */ }
 
 ol {
-	display: inline-block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 0.5cm;
-}
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5cm; }
 
 form {
-	margin-top: 0.5cm;
-	font-size: 20px;
-}
+  margin-top: 0.5cm;
+  font-size: 20px; }
 
 li {
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-}
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto; }
 
 .description {
-	margin-left: 10em;
-	margin-right: 10em;
-}
+  margin-left: 10em;
+  margin-right: 10em; }
+
+#header {
+  width: 100%;
+  background: url("../images/header-bg.png");
+  height: 50px;
+  position: fixed;
+  z-index: 1;
+  top: 0; }
+
+#nav {
+  width: 100%;
+  margin-top: 7px;
+  display: inline-block; }
+
+#nav ul {
+  list-style: none;
+  display: block;
+  margin: 0 auto;
+  text-align: left; }
+
+#nav li {
+  margin-top: 9px;
+  padding-left: 21px;
+  display: inline-block; }
+
+#nav li a {
+  color: #fff;
+  opacity: 0.6;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: 'Fanwood Text', serif; }
+
+#nav li a:hover {
+  color: #fff;
+  opacity: 1; }
+
+.home-container {
+  max-width: 1185px;
+  margin: 0 auto;
+  min-height: 80vh;
+  margin-top: 60px; }
+
+.home-container div {
+  box-sizing: border-box; }
+
+.mix > a {
+  display: inline-block; }
+
+ul {
+  padding: 0; }
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 355px;
+  background-color: white;
+  vertical-align: top;
+  text-align: left;
+  height: 480px;
+  margin: 20px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
+  white-space: normal;
+  -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  color: #4B4F56; }
+
+.card--resource .card-hero {
+  height: 296px; }
+
+.card-hero {
+  background-color: white;
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  position: relative;
+  clear: both;
+  float: left;
+  overflow: auto;
+  width: 100%;
+  padding: 20px; }
+
+.card-body {
+  position: relative;
+  clear: both;
+  float: left;
+  width: 100%;
+  overflow: visible;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  z-index: 2; }
+
+.card-title {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 12px;
+  color: #1D2129; }
+
+.card--resource .card-description {
+  -webkit-line-clamp: 3; }
+
+.card-description {
+  display: block;
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  line-height: 20px;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #4B4F56; }
+
+.card-footer {
+  font-size: 11px;
+  text-transform: uppercase;
+  position: absolute;
+  padding-left: 20px;
+  padding-right: 20px;
+  bottom: 0px;
+  margin: 0 auto;
+  width: 100%; }
+
+.card-footer-wrapper {
+  height: 46px;
+  line-height: 46px;
+  border-top: 1px solid #E9EBEE; }
+
+.card .is-notShownIfHover {
+  display: inline-block !important; }
+
+.card-type {
+  margin-right: 20px;
+  display: inline-block;
+  color: #4B4F56; }
+
+.content {
+  margin-top: 50px; }

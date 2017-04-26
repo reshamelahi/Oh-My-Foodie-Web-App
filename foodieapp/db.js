@@ -35,8 +35,8 @@ User.methods.validPassword = function(password) {
 // contains a reference to the user who made it
 const Comment = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  text: String,
-  name: String
+  text: {type:String, required:true},
+  name: {type:String, required:true}
   //createdAt: {type: Date, required: true},
 });
 
@@ -67,7 +67,7 @@ const Restaurant = new mongoose.Schema({
 // * a list can have 0 or more items
 const List = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-  name: {type: String, required: true},
+  name: String,
   createdAt: {type: Date},
   restaurants: [Restaurant]
 });
@@ -103,9 +103,8 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 
 // TODO: add remainder of setup for slugs, connection, registering models, etc. below
 Link.plugin(URLSlugs('title'));
-
-Restaurant.plugin(URLSlugs('name'));
 List.plugin(URLSlugs('name'));
+Restaurant.plugin(URLSlugs('name'));
 User.plugin(passportLocalMongoose);
 
 mongoose.model("User", User);

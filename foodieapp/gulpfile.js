@@ -25,16 +25,19 @@ gulp.task('default', ['lint'], function () {
 });
 
 /* ---------------------------------------------------------------- */
+
+// TO RUN, USE COMMAND gulp sass TO RUN 
+
+'use strict';
  
 var sass = require('gulp-sass');
-
-gulp.task('styles', function() {
-    gulp.src('sass/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./css/'))
+ 
+gulp.task('sass', function () {
+  return gulp.src('./sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/stylesheets/'));
 });
-
-//Watch task
-gulp.task('default',function() {
-    gulp.watch('sass/**/*.scss',['styles']);
+ 
+gulp.task('sass:watch', function () {
+  gulp.watch('./sass/**/*.scss', ['sass']);
 });

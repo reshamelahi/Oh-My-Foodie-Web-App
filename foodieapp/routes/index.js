@@ -21,18 +21,42 @@ router.get('/', function(req, res, next) {
   // =====================================
   // show the login form
   router.get('/login', function(req, res) {
-
-      // render the page and pass in any flash data if it exists
+    // render the page and pass in any flash data if it exists
       res.render('login', { message: req.flash('loginMessage') }); 
   });
 
-  // process the login form
+ // process the login form
   router.post('/login', passport.authenticate('local-login', {
     successRedirect : '/userprofile', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
 
+router.post('/', function(req, res) {
+  var resFilter = {},
+    searchExists = false;
+  console.log(req.body.search);
+  if(req.body.search) {
+    resFilter.name = req.body.search; 
+    searchExists = true;
+  }
+ 
+  Restaurant.findOne(resFilter, function(err, restaurant) {
+    console.log(restaurant);
+    if (searchExists) {
+      if (restaurant) {
+        res.redirect('/res/' + restaurant.slug);
+      }
+    }
+    else {
+      const message = "Restaurant not found."
+      res.render('index', {title: 'Oh My Foodie!', message: message});
+    }
+    //res.render('restaurant', {'restaurants': restaurants, searchExists: searchExists, restaurant: req.query.search });
+  });
+});
+
+ 
   // process the login form
   // app.post('/login', do all our passport stuff here);
 
@@ -56,25 +80,26 @@ router.get('/', function(req, res, next) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
-  router.get('/userprofile', isLoggedIn, function(req, res) {
+
+/* userprofile */
+router.get('/userprofile', isLoggedIn, function(req, res) {
     List.find({}, (err, lists) => {
-      res.render('userprofile', {user: req.user, lists: lists});
+      res.render('userprofile', {user: req.user, lists: lists, err:err});
     });
   });
 
-  router.post('/userprofile', (req, res) => {
-    const l = new List({
-     name: req.body.name, 
-    });
-    l.save((err, lists) => {
-     if(err) {
-        res.render('userprofile', {lists:lists, err:err}); 
-      }
-      else { 
-       res.redirect('/userprofile'); 
-      }
-    });
+router.post('/userprofile', (req, res) => {
+  const l = new List({
+    name: req.body.name,
+    restaurants: []
   });
+  l.save((err, lists) => {
+    if(err) {
+        res.render('userprofile', {lists:lists, err:err}); 
+    }
+    else { res.redirect('/userprofile'); }
+  });
+});
 
   // =====================================
     // FACEBOOK ROUTES =====================
@@ -96,6 +121,27 @@ router.get('/', function(req, res, next) {
       req.logout();
       res.redirect('/');
   });
+
+// -------------------------------------------------------------------------------
+
+// list page with slug
+router.get('/list/:slug', (req, res) => {
+  List.findOne({slug: req.params.slug}, (err, lists) => {
+    res.render('addToList', {lists:lists, err:err});
+  });
+});
+
+router.post('/list/:slug', (req, res) => {
+  const slugName = req.params.slug;
+  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: new Restaurant ({name: req.body.name})}}, (err, lists) => {
+    if (err) {
+      res.render('addToList', {lists: lists, err: err});
+    }
+    else {
+      res.redirect("/list/" + req.params.slug);
+    }
+  });
+});
 
 // -------------------------------------------------------------------------------
 
@@ -121,6 +167,8 @@ router.post('/nomnomguru', (req, res) => {
   });
 });
 
+// -------------------------------------------------------------------------------
+
 /* foodienetwork */
 router.get('/foodienetwork', (req, res) => {
 	Link.find({}, (err, links) => {
@@ -144,24 +192,22 @@ router.post('/foodienetwork', (req, res) => {
 
 router.get('/foodienetwork/:slug', function(req, res) {
 	Link.findOne({slug: req.params.slug}, (err, links) => {
-    const latestComment = req.session.lastComment || '';
     if (req.query.button === "Vote") {
       Link.findOneAndUpdate({slug: req.params.slug}, {$inc: {votes: 1}}, (err, links) => {
         res.redirect("/foodienetwork");
       });
     }
-		else { res.render('commentform', {links: links, 'lastComment': latestComment}); }
+		else { res.render('commentform', {links: links}); }
 	});
 });
 
 router.post('/foodienetwork/:slug', (req, res) => {
   const slugVar = req.params.slug;
-  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name:req.body.name}}}, (err, links) => {
+  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name: req.body.name}}}, (err, links) => {
     if(err) {
         res.render('commentform', {links:links, err:err}); 
     }
     else {
-      req.session.lastComment = req.body.text;
       res.redirect('/foodienetwork/' + slugVar);
     }
   });
@@ -202,5 +248,13 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+// -------------------------------------------------------------------------------
+
+/* slug for restaurant pages */
+router.get('/res/:slug', function(req, res) {
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants, count) => {
+    res.render('restaurant', {restaurants:restaurants, err:err});
+  });
+});
 
 module.exports = router;

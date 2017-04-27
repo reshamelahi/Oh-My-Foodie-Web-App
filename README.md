@@ -9,7 +9,7 @@ Oh My Foodie (OMF!) is a web app that allows users to create a profile and keep 
 
 ## Data Model
 
-The application will store Users, Lists, Locations, Comments, and Restaurants
+The application will store Users, Lists, Links, Comments, and Restaurants
 
 * users can have multiple lists (via references)
 * each list can have multiple items (by embedding)
@@ -49,25 +49,12 @@ An Example Restaurants:
   name: "Mamoun's",
 	description: "if you're in the nyu area, you have to go to the middle eastern inspired hole in the wall",
 	type: ["Middle Eastern", "hole in the wall"],
-	location: // reference to Location object,
 	pricerange: "$",
 	upvotes: 207,
 	comments: // embedded Comments
 }
 ```
-An Example Location:
 
-```javascript
-{
-	name: // reference to restaurant object,
-	street: "119 MacDougal St",
-	unit: "",
-	city: "New York",
-	state: "NY",
-	zipcode: "10012",
-	country: "United States"
-}
-```
 An Example Comments:
 
 ```javascript
@@ -77,7 +64,15 @@ An Example Comments:
   createdAt: // timestamp
 }
 ```
+An Example Links:
 
+```javascript
+{
+	url: https://www.facebook.com // reference to User object
+	title: "facebook"
+  	comments: [Comments]
+}
+```
 
 ## [Link to Commented First Draft Schema](/foodieapp/db.js) 
 
@@ -179,18 +174,13 @@ Each page will link to the homepage as well as the userprofile
 
 ## Research Topics
 
-* (7 points) Integrate user authentication
+* (8 points) Integrate user authentication
 	* Implement sign-up and registration
 	* Implement sign-in with a provider such as FB
-* (1 point) Per external API
-	* Google maps
-* (3 points) Configuration management
-	* nconf
-* (3 points) Unit testing with JavaScript
-	* Mocha
 * (3 points) Use grunt, gulp, webpack or even make (!) to automate any of the following … must be used in combination with one or more of the other requirements, such as:
 	* (2 points) Integrate ESLint / JSHint / JSLint into your workflow
 		* ESLint
+	* (3 points) Integrate Sass
 
 ## [Link to Initial Main Project File](/foodieapp) 
 
@@ -198,5 +188,4 @@ Each page will link to the homepage as well as the userprofile
 
 
 1. [passport.js authentication docs](http://passportjs.org/docs)
-2. [tutorial on adding google maps with a marker](https://developers.google.com/maps/documentation/javascript/adding-a-google-map)
 3. [tutorial on Sass](https://www.codecademy.com/learn/learn-sass)

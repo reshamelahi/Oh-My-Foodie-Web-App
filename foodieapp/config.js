@@ -1,4 +1,4 @@
-var config = {
+const config = {
     "production": {
         "facebook": {
             clientID: process.env.FB_CLIENT_ID,

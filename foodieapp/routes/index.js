@@ -10,9 +10,43 @@ const List = mongoose.model('List');
 const Restaurant = mongoose.model('Restaurant');
 const Comment = mongoose.model('Comment');
 
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {title: 'Oh My Foodie!'});
+});
+
+router.post('/', function(req, res) {
+  const resFilter = {},
+    searchExists = false;
+  console.log(req.body.search);
+  if(req.body.search) {
+    resFilter.name = req.body.search; 
+    searchExists = true;
+  }
+ 
+  Restaurant.findOne(resFilter, function(err, restaurant) {
+    console.log(restaurant);
+    if (searchExists) {
+      if (restaurant) {
+        res.redirect('/res/' + restaurant.slug);
+      }
+    }
+    else {
+      const message = "Restaurant not found.";
+      res.render('index', {title: 'Oh My Foodie!', message: message});
+    }
+  });
 });
 
   // =====================================
@@ -30,30 +64,6 @@ router.get('/', function(req, res, next) {
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
-
-router.post('/', function(req, res) {
-  var resFilter = {},
-    searchExists = false;
-  console.log(req.body.search);
-  if(req.body.search) {
-    resFilter.name = req.body.search; 
-    searchExists = true;
-  }
- 
-  Restaurant.findOne(resFilter, function(err, restaurant) {
-    console.log(restaurant);
-    if (searchExists) {
-      if (restaurant) {
-        res.redirect('/res/' + restaurant.slug);
-      }
-    }
-    else {
-      const message = "Restaurant not found."
-      res.render('index', {title: 'Oh My Foodie!', message: message});
-    }
-  });
-});
-
  
   // process the login form
   // app.post('/login', do all our passport stuff here);
@@ -131,7 +141,7 @@ router.get('/list/:slug', (req, res) => {
 
 router.post('/list/:slug', (req, res) => {
   const slugName = req.params.slug;
-  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: new Restaurant ({name: req.body.name})}}, (err, lists) => {
+  List.findOneAndUpdate({slug: slugName}, {$push: {restaurants: new Restaurant({name: req.body.name})}}, (err, lists) => {
     if (err) {
       res.render('addToList', {lists: lists, err: err});
     }
@@ -231,16 +241,6 @@ router.post('/goodeats', (req, res) => {
   });
 });
 
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
 // -------------------------------------------------------------------------------
 
 /* slug for restaurant pages */

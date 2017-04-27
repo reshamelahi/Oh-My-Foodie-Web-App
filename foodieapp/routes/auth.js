@@ -1,7 +1,7 @@
-var express = require('express');
-var passport = require('passport');
+const express = require('express');
+const passport = require('passport');
 
-var router = express.Router();
+const router = express.Router();
 
 /**
  * Facebook Login

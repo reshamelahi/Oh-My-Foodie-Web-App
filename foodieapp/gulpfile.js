@@ -27,10 +27,8 @@ gulp.task('default', ['lint'], function () {
 /* ---------------------------------------------------------------- */
 
 // TO RUN, USE COMMAND gulp sass TO RUN 
-
-'use strict';
  
-var sass = require('gulp-sass');
+const sass = require('gulp-sass');
  
 gulp.task('sass', function () {
   return gulp.src('./sass/**/*.scss')

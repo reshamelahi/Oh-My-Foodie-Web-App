@@ -178,3 +178,6 @@ ul {
 
 .content {
   margin-top: 50px; }
+
+.error {
+  color: red; }

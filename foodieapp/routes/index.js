@@ -29,18 +29,19 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   const resFilter = {},
     searchExists = false;
-  console.log(req.body.search);
   if(req.body.search) {
     resFilter.name = req.body.search; 
     searchExists = true;
   }
- 
-  Restaurant.findOne(resFilter, function(err, restaurant) {
-    console.log(restaurant);
+
+  Restaurant.find({}, (err, restaurants) => {
+    console.log(restaurants);
     if (searchExists) {
-      if (restaurant) {
-        res.redirect('/res/' + restaurant.slug);
-      }
+      restaurants = restaurants.filter(function(restaurant) {
+        if (restaurant.name === req.body.search) {
+          res.redirect('/res/' + restaurant.slug);
+        }
+      });
     }
     else {
       const message = "Restaurant not found.";
@@ -236,9 +237,25 @@ router.post('/goodeats', (req, res) => {
   r.save((err, restaurants) => {
     if(err) {
         res.render('goodeats', {restaurants:restaurants, err:err}); 
-    }
+    } 
     else { res.redirect('/goodeats'); }
   });
+  if (req.body.filterType) {
+    Restaurant.find({}, (err, restaurants) => {
+      restaurants = restaurants.filter(function(x) {
+
+        for (i = 0; i < x.type.length; i++) { 
+          if (x.type[i] === req.body.filterType) {
+            return true;
+          }
+        }
+       
+      });
+      console.log(restaurants);
+      res.render('goodeats', {restaurants: restaurants});
+    });
+  }
+  
 });
 
 // -------------------------------------------------------------------------------

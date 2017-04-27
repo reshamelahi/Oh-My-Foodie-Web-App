@@ -222,6 +222,7 @@ router.post('/goodeats', (req, res) => {
     priceRange: req.body.price,
     upvotes: 0
   });
+
   r.save((err, restaurants) => {
     if(err) {
         res.render('goodeats', {restaurants:restaurants, err:err}); 

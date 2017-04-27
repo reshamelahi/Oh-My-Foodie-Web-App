@@ -44,7 +44,6 @@ const Link = new mongoose.Schema({
   url: {type:String, required:true},
   title: {type:String, required:true},
   comments: [Comment],
-  votes: Number
 });
 
 // a restaurant in a list
@@ -54,7 +53,6 @@ const Restaurant = new mongoose.Schema({
   name: {type: String, required: true},
   description: String,
   type: Array,
-  location: {type: mongoose.Schema.Types.ObjectId, ref: 'Location'},
   priceRange: String,
   upvotes: Number,
   comments: [Comment]
@@ -70,17 +68,6 @@ const List = new mongoose.Schema({
   name: String,
   createdAt: {type: Date},
   restaurants: [Restaurant]
-});
-
-// location of a restaurant
-const Location = new mongoose.Schema({
-  name: {type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant'},
-  street: String,
-  unit: String,
-  city: String,
-  state: String,
-  zipcode: Number,
-  country: String
 });
 
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
@@ -111,7 +98,6 @@ mongoose.model("User", User);
 mongoose.model("Comment", Comment);
 mongoose.model("Link", Link);
 mongoose.model("List", List);
-mongoose.model("Location", Location);
 mongoose.model("Restaurant", Restaurant);
 
 mongoose.connect(dbconf);

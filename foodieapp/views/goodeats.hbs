@@ -6,6 +6,38 @@
 
 <hr/>
 
+<h3>Give us your recommendations!</h3>
+<form method="POST" action='/goodeats'>
+  Restaurant Name: <input type="text" name="name" value=""><br>
+  Description: <input type="text" name="description" value=""><br><br>
+  Type of Food: 
+  <select name="type" multiple>
+    <option value="American">American</option>
+      <option value="Asian">Asian</option>
+      <option value="Bakery">Bakery</option>
+      <option value="Brazillian">Brazillian</option>
+      <option value="Chinese">Chinese</option>
+      <option value="Dessert">Dessert</option>
+      <option value="Diner">Diner</option>
+      <option value="Indian">Indian</option>
+      <option value="Italian">Italian</option>
+      <option value="Japanese">Japanese</option>
+      <option value="Latinamerican">Latin American</option>
+      <option value="Mediterranean">Mediterranean</option>
+      <option value="Mexican">Mexican</option>
+      <option value="Middle Eastern">Middle Eastern</option>
+      <option value="Thai">Thai</option>
+      <option value="Vietnamese">Vietnamese</option>
+  </select><br><br>
+  Price: 
+  <input type="radio" name="price" value="$" checked>$
+    <input type="radio" name="price" value="$$">$$
+    <input type="radio" name="price" value="$$$">$$$<br>
+
+  <input type="submit" value="Add Recommendation"/> 
+</form>
+<hr />
+
 <div class="home-container">
     <ol>
     	{{#each restaurants as |restaurant|}}
@@ -17,7 +49,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-title"><a href='res/{{restaurant.slug}}'>{{restaurant.name}}</a></div>
-                        <p class="card-description">{{restaurant.description}}</p>
+                        <p class="card-description">{{restaurant.description}}<br>{{restaurant.upvotes}} votes</p>
                     </div>
                     <div class="card-footer">
                         <div class="card-footer-wrapper">
@@ -37,35 +69,3 @@
 		{{message}}
 	{{/each}}
 {{/if}}</div>
-
-<hr>
-<h3>Give us your recommendations!</h3>
-<form method="POST" action='/goodeats'>
-	Restaurant Name: <input type="text" name="name" value=""><br>
-	Description: <input type="text" name="description" value=""><br><br>
-	Type of Food: 
-	<select name="type" multiple>
-		<option value="American">American</option>
-  		<option value="Asian">Asian</option>
-  		<option value="Bakery">Bakery</option>
-  		<option value="Brazillian">Brazillian</option>
-  		<option value="Chinese">Chinese</option>
-  		<option value="Dessert">Dessert</option>
-  		<option value="Diner">Diner</option>
-  		<option value="Indian">Indian</option>
-  		<option value="Italian">Italian</option>
-  		<option value="Japanese">Japanese</option>
-  		<option value="Latinamerican">Latin American</option>
-  		<option value="Mediterranean">Mediterranean</option>
-  		<option value="Mexican">Mexican</option>
-  		<option value="Middle Eastern">Middle Eastern</option>
-  		<option value="Thai">Thai</option>
-  		<option value="Vietnamese">Vietnamese</option>
-	</select><br><br>
-	Price: 
-	<input type="radio" name="price" value="$" checked>$
-  	<input type="radio" name="price" value="$$">$$
-  	<input type="radio" name="price" value="$$$">$$$<br>
-
-	<input type="submit" value="Add Recommendation"/>	
-</form>

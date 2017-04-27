@@ -244,8 +244,13 @@ function isLoggedIn(req, res, next) {
 
 /* slug for restaurant pages */
 router.get('/res/:slug', function(req, res) {
-  Restaurant.findOne({slug: req.params.slug}, (err, restaurants, count) => {
-    res.render('restaurant', {restaurants:restaurants, err:err});
+  Restaurant.findOne({slug: req.params.slug}, (err, restaurants) => {
+    if (req.query.button === "Upvote This Restaurant") {
+      Restaurant.findOneAndUpdate({slug: req.params.slug}, {$inc: {upvotes: 1}}, (err, restaurants) => {
+        res.redirect("/goodeats");
+      });
+    }
+    else { res.render('restaurant', {restaurants:restaurants, err:err}); }
   });
 });
 

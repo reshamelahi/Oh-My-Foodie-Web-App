@@ -3,8 +3,8 @@
 <hr/>
 
 <div>
-	{{#each links as |link|}}
 	<ol>
+	{{#each links as |link|}}
 	<li><a href={{link.url}}>{{link.title}}</a>, <a href='foodienetwork/{{link.slug}}'>[comments]</a></li>
 	{{/each}}
 	</ol>

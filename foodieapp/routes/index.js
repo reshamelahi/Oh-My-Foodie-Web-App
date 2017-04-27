@@ -252,6 +252,11 @@ router.post('/goodeats', (req, res) => {
           }
         }
       });
+      res.render('goodeats', {restaurants: restaurants, err:err});
+    });
+  }
+  else {
+    Restaurant.find({}, (err, restaurants) => {
       res.render('goodeats', {restaurants: restaurants});
     });
   }

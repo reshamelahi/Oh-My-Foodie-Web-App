@@ -5,7 +5,7 @@
 
 <div class="content">
 	{{#each links.comments as |comment|}}
-		<div class="username">{{comment.name}} says:</div><div class="comment">{{comment.text}}</div><br>
+		<div class="username"><strong>{{comment.name}}</strong> <i>says</i>:</div><div class="comment">{{comment.text}}</div><br>
 	{{/each}}
 </div>
 
@@ -17,7 +17,6 @@
 
 <form method="POST" action={{links.slug}}>
 	Comment: <input type="text" name="text" value="">	
-	Name: <input type="text" name="name" value="">	
 	<input type="submit" value="Add Comment"/>	
 </form>
 

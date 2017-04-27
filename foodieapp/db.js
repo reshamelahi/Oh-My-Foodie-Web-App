@@ -51,11 +51,10 @@ const Link = new mongoose.Schema({
 //    name, description, location, etc.
 const Restaurant = new mongoose.Schema({
   name: {type: String, required: true},
-  description: String,
-  type: Array,
-  priceRange: String,
+  description: {type:String, required:true},
+  type: {type: Array, required:true},
+  priceRange: {type:String, required:true},
   upvotes: Number,
-  comments: [Comment]
 }, {
   _id: true
 });

@@ -226,36 +226,35 @@ router.get('/goodeats', (req, res) => {
 });
 
 router.post('/goodeats', (req, res) => {
-  const r = new Restaurant({
-    name: req.body.name, 
-    description: req.body.description,
-    type: req.body.type,
-    priceRange: req.body.price,
-    upvotes: 0
-  });
+  if (req.body.name && req.body.description && req.body.type) {
+    const r = new Restaurant({
+      name: req.body.name, 
+      description: req.body.description,
+      type: req.body.type,
+      priceRange: req.body.price,
+      upvotes: 0
+    });
 
-  r.save((err, restaurants) => {
-    if(err) {
-        res.render('goodeats', {restaurants:restaurants, err:err}); 
-    } 
-    else { res.redirect('/goodeats'); }
+    r.save((err, restaurants) => {
+      if(err) {
+          res.render('goodeats', {restaurants:restaurants, err:err}); 
+      } 
+      else { res.redirect('/goodeats'); 
+    }
   });
+}
   if (req.body.filterType) {
     Restaurant.find({}, (err, restaurants) => {
       restaurants = restaurants.filter(function(x) {
-
         for (i = 0; i < x.type.length; i++) { 
           if (x.type[i] === req.body.filterType) {
             return true;
           }
         }
-       
       });
-      console.log(restaurants);
       res.render('goodeats', {restaurants: restaurants});
     });
   }
-  
 });
 
 // -------------------------------------------------------------------------------

@@ -144,20 +144,20 @@ router.post('/list/:slug', (req, res) => {
 // -------------------------------------------------------------------------------
 
 // nomnomguru
-router.get('/nomnomguru', (req, res) => {
+router.get('/nomnomguru', isLoggedIn, (req, res) => {
   Comment.find({}, (err, comments) => {
-    res.render('nomnomguru', {comments: comments});
+    res.render('nomnomguru', {comments: comments, user: req.user});
   });
 });
 
-router.post('/nomnomguru', (req, res) => {
+router.post('/nomnomguru', isLoggedIn, (req, res) => {
   const c = new Comment({
-    name: req.body.name,
+    name: req.user.username,
     text: req.body.text 
   });
   c.save((err, lists) => {
     if(err) {
-      res.render('nomnomguru', {comments:comments, err:err}); 
+      res.render('nomnomguru', {user: req.user, comments:comments, err:err}); 
     }
     else { 
       res.redirect('/nomnomguru'); 
@@ -187,15 +187,15 @@ router.post('/foodienetwork', (req, res) => {
   });
 });
 
-router.get('/foodienetwork/:slug', function(req, res) {
+router.get('/foodienetwork/:slug', isLoggedIn, function(req, res) {
 	Link.findOne({slug: req.params.slug}, (err, links) => {
-    res.render('commentform', {links: links});
+    res.render('commentform', {links: links, user: req.user});
 	});
 });
 
-router.post('/foodienetwork/:slug', (req, res) => {
+router.post('/foodienetwork/:slug', isLoggedIn, (req, res) => {
   const slugVar = req.params.slug;
-  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name: req.body.name}}}, (err, links) => {
+  Link.findOneAndUpdate({slug: slugVar}, {$push: {comments: {text: req.body.text, name: req.user.username}}}, (err, links) => {
     if(err) {
         res.render('commentform', {links:links, err:err}); 
     }
@@ -222,6 +222,7 @@ router.post('/goodeats', (req, res) => {
     priceRange: req.body.price,
     upvotes: 0
   });
+
   r.save((err, restaurants) => {
     if(err) {
         res.render('goodeats', {restaurants:restaurants, err:err}); 

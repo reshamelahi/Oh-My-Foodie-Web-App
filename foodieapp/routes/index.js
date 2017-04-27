@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  const resFilter = {},
+  let resFilter = {},
     searchExists = false;
   if(req.body.search) {
     resFilter.name = req.body.search; 

@@ -27,7 +27,6 @@ const Restaurant = new mongoose.Schema({
   name: {type: String, required: true},
   description: String,
   type: Array,
-  location: {type: mongoose.Schema.Types.ObjectId, ref: 'Location'},
   priceRange: String,
   upvotes: Number,
   comments: [Comment]

@@ -103,22 +103,48 @@ router.get('/userprofile', isLoggedIn, function(req, res) {
   });
 
 router.post('/userprofile', isLoggedIn, (req, res) => {
-  const l = new List({
-    name: req.body.name,
-    restaurants: [],
-    user: req.user._id
+  req.user.save(function (err) {
+    console.log("YOOO");
+    if (err)return handleError(err);
+      const l = new List({
+        name: req.body.name,
+        restaurants: [],
+        user: req.user._id
+      });
+      l.save(function (err) {
+        if (err) return handleError(err);
+      });
   });
-  req.user.lists.push(l._id);
-  req.user.save(function(err) {
-    if (err)
-      throw err;
+  List.findOne({name: req.body.name}).populate('user').exec(function(err, list) {
+    console.log("I'M HERE");
+    if (err) return handleError(err);
+    res.send("The user is %s", list.user.username);
   });
-  l.save((err, lists) => {
-    if(err) {
-        res.render('userprofile', {user:req.user, lists:lists, err:err}); 
-    }
-    else { res.redirect('/userprofile'); }
-  });
+  // const l = new List({
+  //   name: req.body.name,
+  //   restaurants: [],
+  //   user: req.user._id
+  // });
+  // req.user.lists.push(l._id);
+  // req.user.save(function(err) {
+  //   if (err)
+  //     throw err;
+  // });
+  // l.save((err, lists) => {
+  //   if(err) {
+  //     throw err;
+  //   }
+  // // l.save((err, lists) => {
+  // //   if(err) {
+  // //       res.render('userprofile', {user:req.user, lists:lists, err:err}); 
+  // //   }
+  // //   else { res.redirect('/userprofile'); }
+  // });
+  // User.findOne({user: req.user._id}).populate('lists').exec(function(err, list) {
+  //   if(err) res.render('userprofile', {user:req.user, lists:lists, err:err}); 
+  //   else res.redirect('/userprofile');
+
+  // });
 });
 
   // =====================================

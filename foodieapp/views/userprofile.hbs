@@ -3,8 +3,8 @@
 
 <div class="list">
 	<ol>
-	{{#each lists as |list|}}
-		<li><a href='list/{{list.slug}}'>{{list.name}}</a></li>
+	{{#each user.lists as |list|}}
+		<li><a href='list/{{lists.slug}}'>{{lists.name}}</a> <button>delete</button></li>
 	{{/each}}
 	</ol>
 </div>

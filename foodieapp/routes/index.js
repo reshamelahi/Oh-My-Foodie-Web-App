@@ -11,9 +11,23 @@ const Restaurant = mongoose.model('Restaurant');
 const Location = mongoose.model('Location');
 const Comment = mongoose.model('Comment');
 
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Oh My Foodie!'});
+router.get('/', function(req, res) {
+  if(isLoggedIn) {
+    res.render('index', {user: req.user, title: 'Oh My Foodie!'});
+  }
+  res.render('index', {title: 'Oh My Foodie!'})
 });
 
   // =====================================
@@ -88,14 +102,20 @@ router.get('/userprofile', isLoggedIn, function(req, res) {
     });
   });
 
-router.post('/userprofile', (req, res) => {
+router.post('/userprofile', isLoggedIn, (req, res) => {
   const l = new List({
     name: req.body.name,
-    restaurants: []
+    restaurants: [],
+    user: req.user._id
+  });
+  req.user.lists.push(l._id);
+  req.user.save(function(err) {
+    if (err)
+      throw err;
   });
   l.save((err, lists) => {
     if(err) {
-        res.render('userprofile', {lists:lists, err:err}); 
+        res.render('userprofile', {user:req.user, lists:lists, err:err}); 
     }
     else { res.redirect('/userprofile'); }
   });
@@ -237,17 +257,6 @@ router.post('/goodeats', (req, res) => {
     else { res.redirect('/goodeats'); }
   });
 });
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
 // -------------------------------------------------------------------------------
 
 /* slug for restaurant pages */

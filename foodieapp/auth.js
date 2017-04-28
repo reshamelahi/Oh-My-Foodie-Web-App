@@ -17,7 +17,7 @@ module.exports = {
 	        'clientSecret'  : 'c59d0ea9b8dd3c182abc0f2cd7479ae7', // your App Secret
 	        'callbackURL'   : 'http://linserv1.cims.nyu.edu:13575/auth/facebook/callback'
 	    },
-	    mongodb: process.env.MONGO_URI
+	    mongodb: "mongodb://sg3688:QgWF757b@class-mongodb.cims.nyu.edu/sg3688"
 	},
 
 	"production_resham": {
@@ -26,6 +26,6 @@ module.exports = {
 	        'clientSecret'  : 'c59d0ea9b8dd3c182abc0f2cd7479ae7', // your App Secret
 	        'callbackURL'   : 'http://linserv1.cims.nyu.edu:12873/auth/facebook/callback'
 	    },
-	    mongodb: process.env.MONGO_URI
+	    mongodb: "mongodb://rae296:JVxJFAuL@class-mongodb.cims.nyu.edu/rae296"
 	}
 };

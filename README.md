@@ -163,14 +163,10 @@ Each page will link to the homepage as well as the userprofile
 6. as a user, I can view all of the restaurant lists I've created in a single list
 7. as a user, I can add items to an existing restaurant list
 8. as a user, I can remove items from an existing restaurant list
-9. as a user I can delete an existing list
-10. as a user, I can chat with other users
-11. as a user, I can create a recommendation for a restaurant
-12. as a user, I can upvote a specific restaurant
-13. as a user, I can search for a restaurant (and filter)
-14. as a user, I can add a restaurant if it does not already exist in the database
-15. as a user, I can interact with nomnomguru
-
+9. as a user, I can chat with other users
+10. as a user, I can create a recommendation for a restaurant
+11. as a user, I can upvote a specific restaurant
+12. as a user, I can search for a restaurant (and filter)
 
 ## Research Topics
 
